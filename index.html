@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>Java script</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body> 
+    <!--behavior=scroll or slide  or altenate-->
+    <marquee behavior="alternate" direction="reight" bgcolor="#00cccc"><h1> BASIC_JQUERY-CHECKPOINT
+        </h1></marquee>
+        <h1>BASIC_JQUERY-CHECKPOINT</h1>
+   <fieldset>     
+        <label for="gbtn" id="groupbtn">
+            <input type="button" value="G"  title="text en gras" id="butgrs"> <!--bouton en gras-->
+            <input type="button" id="butitc" value="I" title=" text Italic"> <!--bouton italic-->
+            <input type="button" id="btnSouligne" value="S" title="souligner text"><!--bouton souligner-->
+        </label>
+            <label for="styleFont"> Police d'ecriture
+                <select name="polic" id="pol" >
+                    <option value="Font Family">Font Family</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Arial">Arial</option>
+                    <option value="Elephant">Elephant</option>
+                    <option value="Times">Times</option>
+                    <option value="sans-serif">sans-serif</option>
+                </select>
+            </label>
+        
+            <label for="FontColor">Couleur du text
+                <input id="choixcouleur" type="color" value="#fad345" name="textcolor" onchange="modifiercouleur()">
+            </label>   
+            <label for="FontColor">Couleur du Font
+                <input id="fontcouleur" type="color" value="#fad345" name="textcolorback" onchange="modifiercolorfont()">
+            </label>
+            
+            <label for="taille">Taille de police   
+                <select name="font-size" id="tpg" >
+                    <option value="fontSize">Font Size</option>
+                    <option value="10px" style="font-size:10px">10pt</option>
+                    <option value="12px" style="font-size:12px">12pt</option>
+                    <option value="14px" style="font-size:14px">14pt</option>
+                    <option value="16px" style="font-size:16px">16pt</option>
+                    <option value="18px" style="font-size:18px">18pt</option>
+                    <option value="20px" style="font-size:20px">20pt</option>
+                    <option value="22px" style="font-size:22px">22pt</option>
+                </select>
+            </label>  
+        </fieldset>        
+    <textarea name="textareabig" id="parg" cols="190" rows="20">        
+      
+            Nous allons créer un programme qui ressemble à Microsoft Word. 
+            Il y aura un paragraphe et un tas de boutons. 
+            Chaque bouton aura un attribut onclick qui reliera une fonction javascript différente. 
+            Ces boutons auront des noms uniques et devraient faire ce qui suit: 
+            -un bouton pour mettre le paragraphe en gras 
+            -un bouton pour rendre le paragraphe en italique 
+            -un bouton pour souligner le paragraphe 
+            -une liste déroulante qui aura un tas de polices, et lorsque vous cliquez sur l'une des polices du paragraphe va changer. 
+             - une liste déroulante qui aura un tas de chiffres (choisissez ce que vous voulez) et lorsque vous cliquez dessus, la taille de la police du paragraphe change en cela. 
+            Tous ces boutons seront sur une ligne et au-dessus du paragraphe. 
+            Vous êtes libre de faire le style que vous voulez. 
+            Référence :  
+        
+    </textarea>
+   
+        <script src="jquery-3.3.1.min.js"> </script>
+        <style>
+        .gras{font-weight: bold }
+        /*.notgras{Font-weight:normal}*/
+        .italic{font-style: italic}
+       /* .notitalic{font-style: normal}*/
+       .soulg{text-decoration: underline}
+       .notsoulg{text-decoration: normal}
+        </style>
+        <script>
+            /*modifier taille de Text*/
+            $(document).ready(function(){
+                $('#tpg').change(function(){
+                 var tailletext=$(":input[name~='font-size']").val();
+                    $('#parg').css('font-size',tailletext);   
+                })
+            })        
+            /*slection couleur de Font */
+               $(document).ready(function(){
+                     $('#fontcouleur').change(function(){
+                     var refcouleurb=$(":input[name~='textcolorback']").val();
+                    $('#parg').css('background-color',refcouleurb);
+                })
+            })
+            /*selection un couleur de text */
+            $(document).ready(function(){
+                $('#choixcouleur').change(function(){
+                var refcouleur=$(":input[name~='textcolor']").val();
+                    $('#parg').css('color',refcouleur);
+                
+                })
+            })
+            /*choisir un style d'ecriture de liste*/
+            $(document).ready(function(){
+               $('#pol').change(function(){
+               var choix=($('#pol').val());
+              $("#parg").css('font-family',choix);
+                });
+            })
+            /*mettre  text Souligne */
+                var k=0;
+            $(document).ready(function (){
+            if(k==0){
+                    $('#btnSouligne').click(function(){
+                   $('#parg').toggleClass('soulg');
+                  /* $('#parg').css('text-decoration','underline')*/
+                    k=1;
+                    });
+                }else(k==1);{
+                     $('#btnSouligne').click(function(){
+                    $('#parg').toggleClass('notsoulg');
+                    k=0;
+                    });
+                 }
+            })
+            /* mettre le text en gras en normal*/
+                var i=0;
+            $(document).ready(function (){
+                if(i==0){
+                    $('#butgrs').click(function(){
+                    $('#parg').toggleClass('gras');
+                    i=1;
+                    });
+                 }else(i==1);{
+                    $('#butgrs').click(function(){
+                    $('#parg').toggleClass('notgras');
+                    i=0;
+                    });
+                 }
+            })
+            /* mettre le text en italic ou normal*/
+                var j=0;
+            $(document).ready(function (){
+                if(j==0){
+                        $('#butitc').click(function(){
+                        $('#parg').toggleClass('italic');
+                        j=1;
+                    });
+                 }else(j==1);{
+                    $('#butitc').click(function(){
+                    $('#parg').toggleClass('notitalic');
+                    j=0;
+                    });
+                }
+            })
+      
+        </script>
+</body>
+</html>
